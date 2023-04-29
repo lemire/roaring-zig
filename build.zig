@@ -8,7 +8,7 @@ pub fn build(b: *std.Build) void {
     // Standard release options allow the person running `zig build` to select
     // between Debug, ReleaseSafe, ReleaseFast, and ReleaseSmall.
     var lib = add(b, target, optimize);
-    lib.install();
+    b.installArtifact(lib);
 
     var main_tests = b.addTest(.{
         .root_source_file = .{ .path = "src/test.zig" },
@@ -28,7 +28,7 @@ pub fn build(b: *std.Build) void {
     example.linkLibrary(lib);
     example.addIncludePath("croaring");
 
-    const run_example = example.run();
+    const run_example = b.addRunArtifact(example);
     run_example.step.dependOn(&example.step); // gotta build it first
     b.step("run-example", "Run the example").dependOn(&run_example.step);
 }

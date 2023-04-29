@@ -43,7 +43,7 @@ const roaring = @import("roaring");
 This is a port of [C example in the CRoaring project](https://github.com/RoaringBitmap/CRoaring#example-c)
 ```zig
 const std = @import("std");
-const roaring = @import("roaring.zig");
+const roaring = @import("roaring");
 const Bitmap = roaring.Bitmap;
 const assert = std.debug.assert;
 const print = std.debug.print;
